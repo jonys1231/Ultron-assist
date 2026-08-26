@@ -1,0 +1,20 @@
+[
+  {
+    "nombre": "Alumno 1",
+    "grupo": "101",
+    "asistencias": 0,
+    "faltas": 0
+  },
+  {
+    "nombre": "Alumno 2",
+    "grupo": "101",
+    "asistencias": 0,
+    "faltas": 0
+  },
+  {
+    "nombre": "Alumno 3",
+    "grupo": "101",
+    "asistencias": 0,
+    "faltas": 0
+  }
+]
