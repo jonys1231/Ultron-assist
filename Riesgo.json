@@ -1,0 +1,17 @@
+{
+  "bajo": {
+    "minimo": 0,
+    "maximo": 4,
+    "color": "verde"
+  },
+  "medio": {
+    "minimo": 5,
+    "maximo": 9,
+    "color": "amarillo"
+  },
+  "alto": {
+    "minimo": 10,
+    "maximo": 999,
+    "color": "rojo"
+  }
+}
