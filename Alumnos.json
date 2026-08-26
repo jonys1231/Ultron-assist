@@ -1,0 +1,16 @@
+[
+  {
+    "nombre": "Juan Pérez",
+    "grupo": "3A",
+    "asistencias": 18,
+    "faltas": 2,
+    "riesgo": "Bajo"
+  },
+  {
+    "nombre": "Ana López",
+    "grupo": "3A",
+    "asistencias": 14,
+    "faltas": 6,
+    "riesgo": "Medio"
+  }
+]
