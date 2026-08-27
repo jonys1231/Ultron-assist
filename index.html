@@ -1,69 +1,132 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ultron Assist</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style>
-        body{
-            font-family: Arial, sans-serif;
-            margin:20px;
-            background:#f5f5f5;
-        }
+<title>Ultron Assist</title>
 
-        h1{
-            color:#2563eb;
-        }
+<style>
 
-        .alumno{
-            display:flex;
-            justify-content:space-between;
-            align-items:center;
-            background:white;
-            padding:10px;
-            margin:10px 0;
-            border-radius:10px;
-        }
+body{
+    font-family: Arial, sans-serif;
+    background:#f5f5f5;
+    text-align:center;
+    padding:30px;
+}
 
-        button{
-            border:none;
-            padding:10px;
-            font-size:18px;
-            border-radius:8px;
-            cursor:pointer;
-        }
+h1{
+    color:#2563eb;
+}
 
-        .verde{
-            background:#22c55e;
-            color:white;
-        }
+.alumno{
+    background:white;
+    padding:30px;
+    border-radius:20px;
+    max-width:700px;
+    margin:auto;
+    box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
 
-        .rojo{
-            background:#ef4444;
-            color:white;
-        }
-    </style>
+#nombreAlumno{
+    display:block;
+    font-size:32px;
+    font-weight:bold;
+    margin-bottom:30px;
+}
+
+button{
+    width:140px;
+    height:140px;
+    font-size:60px;
+    border:none;
+    border-radius:20px;
+    margin:10px;
+    cursor:pointer;
+}
+
+.verde{
+    background:#22c55e;
+}
+
+.rojo{
+    background:#ef4444;
+}
+
+</style>
 </head>
 <body>
 
 <h1>Ultron Assist</h1>
 
 <div class="alumno">
-    <span>Fabian Yair Aguilar Rocha</span>
+    <span id="nombreAlumno"></span>
+
     <div>
-        <button class="verde">🟢</button>
-        <button class="rojo">🔴</button>
+        <button class="verde" onclick="siguiente()">🟢</button>
+        <button class="rojo" onclick="siguiente()">🔴</button>
     </div>
 </div>
 
-<div class="alumno">
-    <span>Tania Bobadilla Hernandez</span>
-    <div>
-        <button class="verde">🟢</button>
-        <button class="rojo">🔴</button>
-    </div>
-</div>
+<script>
+
+const alumnos = [
+"AGUILAR ROCHA FABIAN YAIR",
+"BOBADILLA HERNANDEZ TANIA",
+"CALVO RAMIREZ YESHUA EMMANUEL",
+"CAMPOS BERNAL ABRIL AKARI",
+"CORTES ESCAMILLA ABRAHAM",
+"COTERO MINISTRO XIMENA VALENTINA",
+"CRUZ ORTEGA ERICK URIEL",
+"DAVILA CASTAÑEDA KEVIN",
+"FERNIZA CORTEZ CARLOS ALBERTO",
+"GARCIA FERNANDEZ JEREMY ALAIN",
+"GARCIA RAMIREZ YAZARET MELISSA",
+"GONZALEZ BETANZOS ENGADI TZITZIKI",
+"GUADARRAMA SANCHEZ KARIM",
+"GUARDA HERNANDEZ JEFTE",
+"JARDON ALBA DARSHAN BAKARI",
+"JIMENEZ CORTEZ DIEGO JADIEL",
+"LARA GOMEZ ESTEFANIA",
+"LOME CHEPE JOSE MIGUEL",
+"LOPEZ BERNAL AZUL CAMILA",
+"MANCILLA SALINAS ESTRELLA GUADALUPE",
+"MARTINEZ CHAVEZ ARIANA ABIGAIL",
+"MARTINEZ MARTINEZ JOSE ANGEL",
+"MESAS ORTEGA NARALY",
+"MILLAN BUSTOS AXEL ALBERTO",
+"OCAMPO SANCHEZ AXEL JESUS",
+"ORIHUELA MILLAN JESUS EMMANUEL",
+"PERALTA LOPEZ LEONARDO",
+"PERETE NUÑEZ CAMILA ZOE",
+"QUIROZ RIVERA IVAN ALONSO",
+"REYES PEÑA YOLEI XIMENA",
+"RIOJA PIÑA YAHEL ALBERTO",
+"ROMERO GUTIERREZ ITZEL MARCELA",
+"ROMERO MENDOZA JUAN",
+"ROSALES MARTINEZ SEBASTIAN",
+"SANCHEZ SILVA XIMENA",
+"VARA GARCIA ZOAR",
+"VASQUEZ BUSTOS ROXANA ELIZABETH",
+"VASQUEZ CASTAÑEDA KENIA CAMILA",
+"VASQUEZ TAPIA SEBASTIAN"
+];
+
+let actual = 0;
+
+document.getElementById("nombreAlumno").textContent = alumnos[0];
+
+function siguiente(){
+    actual++;
+
+    if(actual < alumnos.length){
+        document.getElementById("nombreAlumno").textContent = alumnos[actual];
+    }else{
+        document.getElementById("nombreAlumno").textContent = "✅ Lista terminada";
+    }
+}
+
+</script>
 
 </body>
 </html>
