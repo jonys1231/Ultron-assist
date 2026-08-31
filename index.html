@@ -3,108 +3,229 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ultron Assist</title>
+
+<title>Sistema de Asistencia</title>
 
 <style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
 body{
     font-family:Arial,sans-serif;
-    background:#f5f5f5;
+    background:#f7f7f7;
+}
+
+.header{
+    background:linear-gradient(90deg,#0b4d2b,#1b5e20);
+    color:white;
     text-align:center;
+    padding:25px;
+}
+
+.header h1{
+    font-size:32px;
+}
+
+.header p{
+    margin-top:10px;
+    font-size:18px;
+}
+
+.contenedor{
     padding:20px;
 }
 
-h1{
-    color:#2563eb;
+#tituloAlumno{
+    text-align:center;
+    color:#444;
+    font-size:22px;
 }
 
-.alumno{
-    background:white;
-    max-width:900px;
-    margin:auto;
-    padding:30px;
+#contador{
+    text-align:center;
+    color:#0b4d2b;
+    font-weight:bold;
+    font-size:50px;
+    margin:10px 0;
+}
+
+.progreso{
+    width:90%;
+    max-width:700px;
+    height:18px;
+    margin:20px auto;
+    background:#d9e0dc;
     border-radius:20px;
-    box-shadow:0 0 10px rgba(0,0,0,.1);
+    overflow:hidden;
+}
+
+#barra{
+    height:100%;
+    width:0%;
+    background:#0b4d2b;
+}
+
+.tarjeta{
+    max-width:750px;
+    margin:25px auto;
+    background:white;
+    border-radius:25px;
+    padding:30px;
+    box-shadow:0 5px 15px rgba(0,0,0,.10);
+    text-align:center;
+}
+
+#lista{
+    color:#b8860b;
+    font-size:48px;
+    font-weight:bold;
+}
+
+.linea{
+    height:2px;
+    background:#d4af37;
+    margin:20px auto;
+    width:90%;
 }
 
 #nombreAlumno{
-    display:block;
-    font-size:32px;
+    color:#0b4d2b;
+    font-size:50px;
     font-weight:bold;
-    margin:25px 0;
+    line-height:1.2;
 }
 
 .botones{
-    display:flex;
-    justify-content:center;
+    max-width:750px;
+    margin:20px auto;
+    display:grid;
+    grid-template-columns:1fr 1fr;
     gap:15px;
-    flex-wrap:wrap;
 }
 
-button{
-    width:120px;
-    height:120px;
-    font-size:45px;
+.boton{
     border:none;
     border-radius:20px;
+    color:white;
     cursor:pointer;
+    padding:35px 20px;
+    font-size:28px;
+    font-weight:bold;
 }
 
-.verde{
-    background:#22c55e;
+.anterior{
+    background:#0b4d2b;
 }
 
-.rojo{
-    background:#ef4444;
+.presente{
+    background:#43a047;
 }
 
-.flecha{
-    background:#3b82f6;
+.ausente{
+    background:#d32f2f;
+}
+
+.siguiente{
+    background:#0b4d2b;
 }
 
 #descargar{
     display:none;
-    margin-top:20px;
-    width:auto;
-    height:auto;
-    padding:15px 30px;
+    margin:20px auto;
+    padding:20px 40px;
+    font-size:22px;
+    border:none;
+    border-radius:15px;
     background:#f59e0b;
     color:white;
-    font-size:20px;
+    cursor:pointer;
 }
+
+.footer{
+    margin-top:30px;
+    background:#0b4d2b;
+    color:white;
+    text-align:center;
+    padding:20px;
+}
+
 </style>
 </head>
 
 <body>
 
-<h1>Ultron Assist</h1>
+<div class="header">
+    <h1>UAEMéx</h1>
+    <p>Sistema de Asistencia</p>
+</div>
 
-<h2 id="contador"></h2>
+<div class="contenedor">
 
-<div class="alumno">
+    <div id="tituloAlumno">Alumno</div>
 
-<span id="nombreAlumno"></span>
+    <div id="contador"></div>
 
-<div class="botones">
+    <div class="progreso">
+        <div id="barra"></div>
+    </div>
 
-<button class="flecha" onclick="anterior()">⬅️</button>
+    <div class="tarjeta">
 
-<button class="verde" onclick="registrar('Presente')">🟢</button>
+        <div id="lista"></div>
 
-<button class="rojo" onclick="registrar('Ausente')">🔴</button>
+        <div class="linea"></div>
 
-<button class="flecha" onclick="siguiente()">➡️</button>
+        <div id="nombreAlumno"></div>
+
+    </div>
+
+    <div class="botones">
+
+        <button class="boton anterior"
+                onclick="anterior()">
+            ⬅️<br>Anterior
+        </button>
+
+        <button class="boton presente"
+                onclick="registrar('Presente')">
+            ✅<br>Presente
+        </button>
+
+        <button class="boton ausente"
+                onclick="registrar('Ausente')">
+            ❌<br>Ausente
+        </button>
+
+        <button class="boton siguiente"
+                onclick="siguiente()">
+            ➡️<br>Siguiente
+        </button>
+
+    </div>
+
+    <div style="text-align:center">
+
+        <button id="descargar"
+                onclick="descargarReporte()">
+            📊 Descargar Reporte
+        </button>
+
+    </div>
 
 </div>
 
-<button id="descargar" onclick="descargarReporte()">
-📊 Descargar Reporte
-</button>
-
+<div class="footer">
+    Sistema de Asistencia Grupo 18
 </div>
 
 <script>
 
 const alumnos = [
+
 {lista:1,nombre:"AGUILAR ROCHA FABIAN YAIR"},
 {lista:2,nombre:"BOBADILLA HERNANDEZ TANIA"},
 {lista:3,nombre:"CALVO RAMIREZ YESHUA EMMANUEL"},
@@ -144,6 +265,7 @@ const alumnos = [
 {lista:37,nombre:"VASQUEZ BUSTOS ROXANA ELIZABETH"},
 {lista:38,nombre:"VASQUEZ CASTAÑEDA KENIA CAMILA"},
 {lista:39,nombre:"VASQUEZ TAPIA SEBASTIAN"}
+
 ];
 
 let actual = 0;
@@ -151,13 +273,21 @@ let asistencias = [];
 
 function mostrarAlumno(){
 
+document.getElementById("lista").textContent =
+"Lista " + alumnos[actual].lista;
+
 document.getElementById("nombreAlumno").textContent =
-"Lista " + alumnos[actual].lista +
-" | " + alumnos[actual].nombre;
+alumnos[actual].nombre;
 
 document.getElementById("contador").textContent =
-"Alumno " + (actual + 1) +
-" de " + alumnos.length;
+(actual + 1) + " de " + alumnos.length;
+
+let porcentaje =
+((actual + 1) / alumnos.length) * 100;
+
+document.getElementById("barra").style.width =
+porcentaje + "%";
+
 }
 
 function registrar(estado){
@@ -168,34 +298,39 @@ Alumno: alumnos[actual].nombre,
 Asistencia: estado
 });
 
-if(actual < alumnos.length-1){
+if(actual < alumnos.length - 1){
+
 actual++;
 mostrarAlumno();
+
 }else{
 
 document.getElementById("nombreAlumno").textContent =
-"✅ Lista terminada";
-
-document.getElementById("contador").textContent =
-"Registros: " + asistencias.length;
+"✅ LISTA TERMINADA";
 
 document.getElementById("descargar").style.display =
 "inline-block";
+
 }
+
 }
 
 function siguiente(){
-if(actual < alumnos.length-1){
+
+if(actual < alumnos.length - 1){
 actual++;
 mostrarAlumno();
 }
+
 }
 
 function anterior(){
+
 if(actual > 0){
 actual--;
 mostrarAlumno();
 }
+
 }
 
 function descargarReporte(){
@@ -216,15 +351,14 @@ let csv = "";
 csv += "REPORTE DE ASISTENCIA\n";
 csv += "Fecha," + fecha + "\n";
 csv += "Hora," + hora + "\n\n";
-
 csv += "Lista,Alumno,Asistencia\n";
 
-asistencias.forEach(alumno => {
+asistencias.forEach(registro => {
 
 csv +=
-alumno.Lista + "," +
-'"' + alumno.Alumno + '"' + "," +
-alumno.Asistencia + "\n";
+registro.Lista + "," +
+'"' + registro.Alumno + '"' + "," +
+registro.Asistencia + "\n";
 
 });
 
@@ -244,6 +378,7 @@ hora.replace(":","-") +
 ".csv";
 
 link.click();
+
 }
 
 mostrarAlumno();
