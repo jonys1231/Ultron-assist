@@ -3,15 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Ultron Assist</title>
 
-https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.jsscript>
-
 <style>
-
 body{
-    font-family: Arial, sans-serif;
+    font-family:Arial,sans-serif;
     background:#f5f5f5;
     text-align:center;
     padding:20px;
@@ -21,17 +17,13 @@ h1{
     color:#2563eb;
 }
 
-h2{
-    color:#666;
-}
-
 .alumno{
     background:white;
     max-width:900px;
     margin:auto;
     padding:30px;
     border-radius:20px;
-    box-shadow:0 0 10px rgba(0,0,0,0.1);
+    box-shadow:0 0 10px rgba(0,0,0,.1);
 }
 
 #nombreAlumno{
@@ -44,14 +36,14 @@ h2{
 .botones{
     display:flex;
     justify-content:center;
-    flex-wrap:wrap;
     gap:15px;
+    flex-wrap:wrap;
 }
 
 button{
     width:120px;
     height:120px;
-    font-size:50px;
+    font-size:45px;
     border:none;
     border-radius:20px;
     cursor:pointer;
@@ -69,17 +61,16 @@ button{
     background:#3b82f6;
 }
 
-#excel{
+#descargar{
     display:none;
+    margin-top:20px;
     width:auto;
     height:auto;
     padding:15px 30px;
-    font-size:20px;
-    margin-top:20px;
     background:#f59e0b;
     color:white;
+    font-size:20px;
 }
-
 </style>
 </head>
 
@@ -105,8 +96,8 @@ button{
 
 </div>
 
-<button id="excel" onclick="descargarExcel()">
-📊 Descargar Excel
+<button id="descargar" onclick="descargarReporte()">
+📊 Descargar Reporte
 </button>
 
 </div>
@@ -161,17 +152,12 @@ let asistencias = [];
 function mostrarAlumno(){
 
 document.getElementById("nombreAlumno").textContent =
-"Lista " +
-alumnos[actual].lista +
-" | " +
-alumnos[actual].nombre;
+"Lista " + alumnos[actual].lista +
+" | " + alumnos[actual].nombre;
 
 document.getElementById("contador").textContent =
-"Alumno " +
-(actual + 1) +
-" de " +
-alumnos.length;
-
+"Alumno " + (actual + 1) +
+" de " + alumnos.length;
 }
 
 function registrar(estado){
@@ -182,62 +168,82 @@ Alumno: alumnos[actual].nombre,
 Asistencia: estado
 });
 
-if(actual < alumnos.length - 1){
-
+if(actual < alumnos.length-1){
 actual++;
 mostrarAlumno();
-
 }else{
 
 document.getElementById("nombreAlumno").textContent =
 "✅ Lista terminada";
 
 document.getElementById("contador").textContent =
-"Asistencias registradas: " +
-asistencias.length;
+"Registros: " + asistencias.length;
 
-document.getElementById("excel").style.display =
+document.getElementById("descargar").style.display =
 "inline-block";
-
 }
-
 }
 
 function siguiente(){
-
-if(actual < alumnos.length - 1){
+if(actual < alumnos.length-1){
 actual++;
 mostrarAlumno();
 }
-
 }
 
 function anterior(){
-
 if(actual > 0){
 actual--;
 mostrarAlumno();
 }
-
 }
 
-function descargarExcel(){
+function descargarReporte(){
 
-const hoja = XLSX.utils.json_to_sheet(asistencias);
+const ahora = new Date();
 
-const libro = XLSX.utils.book_new();
+const fecha =
+ahora.getFullYear() + "-" +
+String(ahora.getMonth()+1).padStart(2,"0") + "-" +
+String(ahora.getDate()).padStart(2,"0");
 
-XLSX.utils.book_append_sheet(
-libro,
-hoja,
-"Asistencia"
-);
+const hora =
+String(ahora.getHours()).padStart(2,"0") + ":" +
+String(ahora.getMinutes()).padStart(2,"0");
 
-XLSX.writeFile(
-libro,
-"Asistencia_Grupo18.xlsx"
-);
+let csv = "";
 
+csv += "REPORTE DE ASISTENCIA\n";
+csv += "Fecha," + fecha + "\n";
+csv += "Hora," + hora + "\n\n";
+
+csv += "Lista,Alumno,Asistencia\n";
+
+asistencias.forEach(alumno => {
+
+csv +=
+alumno.Lista + "," +
+'"' + alumno.Alumno + '"' + "," +
+alumno.Asistencia + "\n";
+
+});
+
+const blob =
+new Blob([csv], {type:"text/csv;charset=utf-8;"});
+
+const link =
+document.createElement("a");
+
+link.href =
+URL.createObjectURL(blob);
+
+link.download =
+"Asistencia_" +
+fecha + "_" +
+hora.replace(":","-") +
+".csv";
+
+link.click();
 }
 
 mostrarAlumno();
