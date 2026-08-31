@@ -9,148 +9,152 @@
 <style>
 
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+margin:0;
+padding:0;
+box-sizing:border-box;
 }
 
 body{
-    font-family:Arial,sans-serif;
-    background:#f7f7f7;
+font-family:Arial,sans-serif;
+background:#f5f5f5;
 }
 
 .header{
-    background:linear-gradient(90deg,#0b4d2b,#1b5e20);
-    color:white;
-    text-align:center;
-    padding:25px;
+background:linear-gradient(90deg,#0b4f2f,#0f6a40);
+color:white;
+text-align:center;
+padding:25px;
 }
 
 .header h1{
-    font-size:32px;
+font-size:32px;
 }
 
 .header p{
-    margin-top:10px;
-    font-size:18px;
+font-size:18px;
+margin-top:5px;
 }
 
 .contenedor{
-    padding:20px;
+padding:20px;
 }
 
-#tituloAlumno{
-    text-align:center;
-    color:#444;
-    font-size:22px;
+#titulo{
+text-align:center;
+font-size:22px;
+color:#444;
 }
 
 #contador{
-    text-align:center;
-    color:#0b4d2b;
-    font-weight:bold;
-    font-size:50px;
-    margin:10px 0;
+text-align:center;
+font-size:52px;
+color:#0b4f2f;
+font-weight:bold;
+margin:10px 0;
 }
 
 .progreso{
-    width:90%;
-    max-width:700px;
-    height:18px;
-    margin:20px auto;
-    background:#d9e0dc;
-    border-radius:20px;
-    overflow:hidden;
+width:90%;
+max-width:750px;
+margin:auto;
+height:16px;
+background:#d9d9d9;
+border-radius:20px;
+overflow:hidden;
 }
 
 #barra{
-    height:100%;
-    width:0%;
-    background:#0b4d2b;
+height:100%;
+width:0%;
+background:#0b4f2f;
 }
 
 .tarjeta{
-    max-width:750px;
-    margin:25px auto;
-    background:white;
-    border-radius:25px;
-    padding:30px;
-    box-shadow:0 5px 15px rgba(0,0,0,.10);
-    text-align:center;
+background:white;
+max-width:750px;
+margin:25px auto;
+padding:30px;
+border-radius:25px;
+box-shadow:0 4px 12px rgba(0,0,0,.15);
+text-align:center;
 }
 
 #lista{
-    color:#b8860b;
-    font-size:48px;
-    font-weight:bold;
+font-size:48px;
+font-weight:bold;
+color:#b58900;
 }
 
 .linea{
-    height:2px;
-    background:#d4af37;
-    margin:20px auto;
-    width:90%;
+height:2px;
+background:#d4af37;
+margin:20px auto;
+width:90%;
 }
 
 #nombreAlumno{
-    color:#0b4d2b;
-    font-size:50px;
-    font-weight:bold;
-    line-height:1.2;
+font-size:48px;
+font-weight:bold;
+line-height:1.2;
+color:#0b4f2f;
 }
 
 .botones{
-    max-width:750px;
-    margin:20px auto;
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:15px;
+max-width:750px;
+margin:auto;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:15px;
 }
 
 .boton{
-    border:none;
-    border-radius:20px;
-    color:white;
-    cursor:pointer;
-    padding:35px 20px;
-    font-size:28px;
-    font-weight:bold;
-}
-
-.anterior{
-    background:#0b4d2b;
+border:none;
+border-radius:20px;
+padding:35px;
+font-size:28px;
+font-weight:bold;
+color:white;
+cursor:pointer;
 }
 
 .presente{
-    background:#43a047;
+background:#43a047;
 }
 
 .ausente{
-    background:#d32f2f;
+background:#d32f2f;
+}
+
+.anterior{
+background:#0b4f2f;
 }
 
 .siguiente{
-    background:#0b4d2b;
+background:#0b4f2f;
 }
 
 #descargar{
-    display:none;
-    margin:20px auto;
-    padding:20px 40px;
-    font-size:22px;
-    border:none;
-    border-radius:15px;
-    background:#f59e0b;
-    color:white;
-    cursor:pointer;
+display:none;
+margin:25px auto;
+padding:18px 35px;
+font-size:22px;
+background:#f59e0b;
+color:white;
+border:none;
+border-radius:15px;
+cursor:pointer;
+}
+
+.seccionDescarga{
+text-align:center;
 }
 
 .footer{
-    margin-top:30px;
-    background:#0b4d2b;
-    color:white;
-    text-align:center;
-    padding:20px;
+margin-top:40px;
+background:#0b4f2f;
+color:white;
+text-align:center;
+padding:20px;
 }
 
 </style>
@@ -159,73 +163,68 @@ body{
 <body>
 
 <div class="header">
-    <h1>UAEMéx</h1>
-    <p>Sistema de Asistencia</p>
+<h1>UAEMéx</h1>
+<p>Sistema de Asistencia</p>
 </div>
 
 <div class="contenedor">
 
-    <div id="tituloAlumno">Alumno</div>
+<div id="titulo">Alumno</div>
 
-    <div id="contador"></div>
+<div id="contador"></div>
 
-    <div class="progreso">
-        <div id="barra"></div>
-    </div>
+<div class="progreso">
+<div id="barra"></div>
+</div>
 
-    <div class="tarjeta">
+<div class="tarjeta">
+<div id="lista"></div>
 
-        <div id="lista"></div>
+<div class="linea"></div>
 
-        <div class="linea"></div>
+<div id="nombreAlumno"></div>
+</div>
 
-        <div id="nombreAlumno"></div>
+<div class="botones">
 
-    </div>
+<button class="boton presente"
+onclick="registrar('Presente')">
+✅<br>Presente
+</button>
 
-    <div class="botones">
+<button class="boton ausente"
+onclick="registrar('Ausente')">
+❌<br>Ausente
+</button>
 
-        <button class="boton anterior"
-                onclick="anterior()">
-            ⬅️<br>Anterior
-        </button>
+<button class="boton anterior"
+onclick="anterior()">
+⬅️<br>Anterior
+</button>
 
-        <button class="boton presente"
-                onclick="registrar('Presente')">
-            ✅<br>Presente
-        </button>
+<button class="boton siguiente"
+onclick="siguiente()">
+➡️<br>Siguiente
+</button>
 
-        <button class="boton ausente"
-                onclick="registrar('Ausente')">
-            ❌<br>Ausente
-        </button>
+</div>
 
-        <button class="boton siguiente"
-                onclick="siguiente()">
-            ➡️<br>Siguiente
-        </button>
-
-    </div>
-
-    <div style="text-align:center">
-
-        <button id="descargar"
-                onclick="descargarReporte()">
-            📊 Descargar Reporte
-        </button>
-
-    </div>
+<div class="seccionDescarga">
+<button id="descargar"
+onclick="descargarReporte()">
+📊 Descargar Reporte
+</button>
+</div>
 
 </div>
 
 <div class="footer">
-    Sistema de Asistencia Grupo 18
+Sistema de Asistencia Grupo 18
 </div>
 
 <script>
 
 const alumnos = [
-
 {lista:1,nombre:"AGUILAR ROCHA FABIAN YAIR"},
 {lista:2,nombre:"BOBADILLA HERNANDEZ TANIA"},
 {lista:3,nombre:"CALVO RAMIREZ YESHUA EMMANUEL"},
@@ -265,7 +264,6 @@ const alumnos = [
 {lista:37,nombre:"VASQUEZ BUSTOS ROXANA ELIZABETH"},
 {lista:38,nombre:"VASQUEZ CASTAÑEDA KENIA CAMILA"},
 {lista:39,nombre:"VASQUEZ TAPIA SEBASTIAN"}
-
 ];
 
 let actual = 0;
@@ -280,13 +278,13 @@ document.getElementById("nombreAlumno").textContent =
 alumnos[actual].nombre;
 
 document.getElementById("contador").textContent =
-(actual + 1) + " de " + alumnos.length;
+(actual+1)+" de "+alumnos.length;
 
-let porcentaje =
-((actual + 1) / alumnos.length) * 100;
+let progreso =
+((actual+1)/alumnos.length)*100;
 
 document.getElementById("barra").style.width =
-porcentaje + "%";
+progreso+"%";
 
 }
 
@@ -298,39 +296,30 @@ Alumno: alumnos[actual].nombre,
 Asistencia: estado
 });
 
-if(actual < alumnos.length - 1){
-
+if(actual < alumnos.length-1){
 actual++;
 mostrarAlumno();
-
 }else{
-
 document.getElementById("nombreAlumno").textContent =
 "✅ LISTA TERMINADA";
 
 document.getElementById("descargar").style.display =
 "inline-block";
-
 }
-
 }
 
 function siguiente(){
-
-if(actual < alumnos.length - 1){
+if(actual < alumnos.length-1){
 actual++;
 mostrarAlumno();
 }
-
 }
 
 function anterior(){
-
 if(actual > 0){
 actual--;
 mostrarAlumno();
 }
-
 }
 
 function descargarReporte(){
@@ -338,32 +327,30 @@ function descargarReporte(){
 const ahora = new Date();
 
 const fecha =
-ahora.getFullYear() + "-" +
-String(ahora.getMonth()+1).padStart(2,"0") + "-" +
+ahora.getFullYear()+"-"+
+String(ahora.getMonth()+1).padStart(2,"0")+"-"+
 String(ahora.getDate()).padStart(2,"0");
 
 const hora =
-String(ahora.getHours()).padStart(2,"0") + ":" +
+String(ahora.getHours()).padStart(2,"0")+":"+
 String(ahora.getMinutes()).padStart(2,"0");
 
 let csv = "";
 
 csv += "REPORTE DE ASISTENCIA\n";
-csv += "Fecha," + fecha + "\n";
-csv += "Hora," + hora + "\n\n";
+csv += "Fecha,"+fecha+"\n";
+csv += "Hora,"+hora+"\n\n";
+
 csv += "Lista,Alumno,Asistencia\n";
 
 asistencias.forEach(registro => {
-
-csv +=
-registro.Lista + "," +
-'"' + registro.Alumno + '"' + "," +
-registro.Asistencia + "\n";
-
+csv += registro.Lista + ",";
+csv += '"' + registro.Alumno + '"' + ",";
+csv += registro.Asistencia + "\n";
 });
 
 const blob =
-new Blob([csv], {type:"text/csv;charset=utf-8;"});
+new Blob([csv],{type:"text/csv;charset=utf-8;"});
 
 const link =
 document.createElement("a");
@@ -372,10 +359,7 @@ link.href =
 URL.createObjectURL(blob);
 
 link.download =
-"Asistencia_" +
-fecha + "_" +
-hora.replace(":","-") +
-".csv";
+"Asistencia_"+fecha+"_"+hora.replace(":","-")+".csv";
 
 link.click();
 
