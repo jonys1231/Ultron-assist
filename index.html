@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Sistema de Asistencia</title>
 
 <style>
@@ -15,12 +14,12 @@ box-sizing:border-box;
 }
 
 body{
-font-family:Arial,sans-serif;
-background:#f5f5f5;
+font-family:Arial, sans-serif;
+background:#f4f4f4;
 }
 
 .header{
-background:linear-gradient(90deg,#0b4f2f,#0f6a40);
+background:linear-gradient(90deg,#0b4f2f,#116d42);
 color:white;
 text-align:center;
 padding:25px;
@@ -42,23 +41,23 @@ padding:20px;
 #titulo{
 text-align:center;
 font-size:22px;
-color:#444;
+color:#555;
 }
 
 #contador{
 text-align:center;
-font-size:52px;
-color:#0b4f2f;
+font-size:50px;
 font-weight:bold;
+color:#0b4f2f;
 margin:10px 0;
 }
 
 .progreso{
 width:90%;
-max-width:750px;
-margin:auto;
+max-width:700px;
 height:16px;
-background:#d9d9d9;
+background:#ddd;
+margin:20px auto;
 border-radius:20px;
 overflow:hidden;
 }
@@ -72,17 +71,17 @@ background:#0b4f2f;
 .tarjeta{
 background:white;
 max-width:750px;
-margin:25px auto;
-padding:30px;
+margin:auto;
 border-radius:25px;
-box-shadow:0 4px 12px rgba(0,0,0,.15);
+padding:30px;
+box-shadow:0 4px 10px rgba(0,0,0,.15);
 text-align:center;
 }
 
 #lista{
-font-size:48px;
+font-size:42px;
 font-weight:bold;
-color:#b58900;
+color:#b8860b;
 }
 
 .linea{
@@ -93,7 +92,7 @@ width:90%;
 }
 
 #nombreAlumno{
-font-size:48px;
+font-size:46px;
 font-weight:bold;
 line-height:1.2;
 color:#0b4f2f;
@@ -101,7 +100,7 @@ color:#0b4f2f;
 
 .botones{
 max-width:750px;
-margin:auto;
+margin:20px auto;
 display:grid;
 grid-template-columns:1fr 1fr;
 gap:15px;
@@ -135,8 +134,8 @@ background:#0b4f2f;
 
 #descargar{
 display:none;
-margin:25px auto;
-padding:18px 35px;
+margin-top:20px;
+padding:18px 30px;
 font-size:22px;
 background:#f59e0b;
 color:white;
@@ -145,12 +144,8 @@ border-radius:15px;
 cursor:pointer;
 }
 
-.seccionDescarga{
-text-align:center;
-}
-
 .footer{
-margin-top:40px;
+margin-top:30px;
 background:#0b4f2f;
 color:white;
 text-align:center;
@@ -179,9 +174,7 @@ padding:20px;
 
 <div class="tarjeta">
 <div id="lista"></div>
-
 <div class="linea"></div>
-
 <div id="nombreAlumno"></div>
 </div>
 
@@ -209,7 +202,7 @@ onclick="siguiente()">
 
 </div>
 
-<div class="seccionDescarga">
+<div style="text-align:center;">
 <button id="descargar"
 onclick="descargarReporte()">
 📊 Descargar Reporte
@@ -267,7 +260,7 @@ const alumnos = [
 ];
 
 let actual = 0;
-let asistencias = [];
+let asistencias = {};
 
 function mostrarAlumno(){
 
@@ -278,25 +271,25 @@ document.getElementById("nombreAlumno").textContent =
 alumnos[actual].nombre;
 
 document.getElementById("contador").textContent =
-(actual+1)+" de "+alumnos.length;
+(actual + 1) + " de " + alumnos.length;
 
-let progreso =
-((actual+1)/alumnos.length)*100;
+let porcentaje =
+((actual + 1) / alumnos.length) * 100;
 
 document.getElementById("barra").style.width =
-progreso+"%";
+porcentaje + "%";
 
 }
 
 function registrar(estado){
 
-asistencias.push({
+asistencias[alumnos[actual].lista] = {
 Lista: alumnos[actual].lista,
 Alumno: alumnos[actual].nombre,
 Asistencia: estado
-});
+};
 
-if(actual < alumnos.length-1){
+if(actual < alumnos.length - 1){
 actual++;
 mostrarAlumno();
 }else{
@@ -308,16 +301,16 @@ document.getElementById("descargar").style.display =
 }
 }
 
-function siguiente(){
-if(actual < alumnos.length-1){
-actual++;
+function anterior(){
+if(actual > 0){
+actual--;
 mostrarAlumno();
 }
 }
 
-function anterior(){
-if(actual > 0){
-actual--;
+function siguiente(){
+if(actual < alumnos.length - 1){
+actual++;
 mostrarAlumno();
 }
 }
@@ -332,36 +325,42 @@ String(ahora.getMonth()+1).padStart(2,"0")+"-"+
 String(ahora.getDate()).padStart(2,"0");
 
 const hora =
-String(ahora.getHours()).padStart(2,"0")+":"+
+String(ahora.getHours()).padStart(2,"0")+"-"+
 String(ahora.getMinutes()).padStart(2,"0");
 
 let csv = "";
 
-csv += "REPORTE DE ASISTENCIA\n";
-csv += "Fecha,"+fecha+"\n";
-csv += "Hora,"+hora+"\n\n";
+csv += "REPORTE DE ASISTENCIA\r\n";
+csv += "Fecha," + fecha + "\r\n";
+csv += "Hora," + hora.replace("-",":") + "\r\n\r\n";
+csv += "Lista,Alumno,Asistencia\r\n";
 
-csv += "Lista,Alumno,Asistencia\n";
+Object.values(asistencias).forEach(registro => {
 
-asistencias.forEach(registro => {
-csv += registro.Lista + ",";
-csv += '"' + registro.Alumno + '"' + ",";
-csv += registro.Asistencia + "\n";
+csv +=
+registro.Lista + "," +
+'"' + registro.Alumno + '"' + "," +
+registro.Asistencia + "\r\n";
+
 });
 
-const blob =
-new Blob([csv],{type:"text/csv;charset=utf-8;"});
+const blob = new Blob(
+[csv],
+{type:"text/csv;charset=utf-8;"}
+);
 
-const link =
-document.createElement("a");
+const enlace = document.createElement("a");
 
-link.href =
-URL.createObjectURL(blob);
+enlace.href = URL.createObjectURL(blob);
 
-link.download =
-"Asistencia_"+fecha+"_"+hora.replace(":","-")+".csv";
+enlace.download =
+"Asistencia_" + fecha + "_" + hora + ".csv";
 
-link.click();
+document.body.appendChild(enlace);
+
+enlace.click();
+
+document.body.removeChild(enlace);
 
 }
 
