@@ -3,11 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Ultron Assist</title>
 
 <style>
-
 body{
     font-family: Arial, sans-serif;
     background:#f5f5f5;
@@ -19,12 +17,16 @@ h1{
     color:#2563eb;
 }
 
+h2{
+    color:#666;
+}
+
 .alumno{
     background:white;
+    max-width:900px;
+    margin:auto;
     padding:30px;
     border-radius:20px;
-    max-width:700px;
-    margin:auto;
     box-shadow:0 0 10px rgba(0,0,0,0.1);
 }
 
@@ -32,13 +34,13 @@ h1{
     display:block;
     font-size:32px;
     font-weight:bold;
-    margin-bottom:30px;
+    margin:30px 0;
 }
 
 button{
-    width:140px;
-    height:140px;
-    font-size:60px;
+    width:120px;
+    height:120px;
+    font-size:50px;
     border:none;
     border-radius:20px;
     margin:10px;
@@ -53,78 +55,106 @@ button{
     background:#ef4444;
 }
 
+.flecha{
+    background:#3b82f6;
+    color:white;
+}
 </style>
 </head>
+
 <body>
 
-<h1>Ultron Assist</<h2>
-    id="contador">Alumno 1 de 39</h2>
-<div class="alumno">
-    <span id="nombreAlumno"></span>
+<h1>Ultron Assist</h1>
 
-    <div>
-        <button class="verde" onclick="siguiente()">🟢</button>
-        <button class="rojo" onclick="siguiente()">🔴</button>
-    </div>
+<h2 id="contador"></h2>
+
+<div class="alumno">
+
+<span id="nombreAlumno"></span>
+
+<div>
+    <button class="flecha" onclick="anterior()">⬅️</button>
+
+    <button class="verde" onclick="siguiente()">🟢</button>
+
+    <button class="rojo" onclick="siguiente()">🔴</button>
+
+    <button class="flecha" onclick="siguiente()">➡️</button>
+</div>
+
 </div>
 
 <script>
 
 const alumnos = [
-"AGUILAR ROCHA FABIAN YAIR",
-"BOBADILLA HERNANDEZ TANIA",
-"CALVO RAMIREZ YESHUA EMMANUEL",
-"CAMPOS BERNAL ABRIL AKARI",
-"CORTES ESCAMILLA ABRAHAM",
-"COTERO MINISTRO XIMENA VALENTINA",
-"CRUZ ORTEGA ERICK URIEL",
-"DAVILA CASTAÑEDA KEVIN",
-"FERNIZA CORTEZ CARLOS ALBERTO",
-"GARCIA FERNANDEZ JEREMY ALAIN",
-"GARCIA RAMIREZ YAZARET MELISSA",
-"GONZALEZ BETANZOS ENGADI TZITZIKI",
-"GUADARRAMA SANCHEZ KARIM",
-"GUARDA HERNANDEZ JEFTE",
-"JARDON ALBA DARSHAN BAKARI",
-"JIMENEZ CORTEZ DIEGO JADIEL",
-"LARA GOMEZ ESTEFANIA",
-"LOME CHEPE JOSE MIGUEL",
-"LOPEZ BERNAL AZUL CAMILA",
-"MANCILLA SALINAS ESTRELLA GUADALUPE",
-"MARTINEZ CHAVEZ ARIANA ABIGAIL",
-"MARTINEZ MARTINEZ JOSE ANGEL",
-"MESAS ORTEGA NARALY",
-"MILLAN BUSTOS AXEL ALBERTO",
-"OCAMPO SANCHEZ AXEL JESUS",
-"ORIHUELA MILLAN JESUS EMMANUEL",
-"PERALTA LOPEZ LEONARDO",
-"PERETE NUÑEZ CAMILA ZOE",
-"QUIROZ RIVERA IVAN ALONSO",
-"REYES PEÑA YOLEI XIMENA",
-"RIOJA PIÑA YAHEL ALBERTO",
-"ROMERO GUTIERREZ ITZEL MARCELA",
-"ROMERO MENDOZA JUAN",
-"ROSALES MARTINEZ SEBASTIAN",
-"SANCHEZ SILVA XIMENA",
-"VARA GARCIA ZOAR",
-"VASQUEZ BUSTOS ROXANA ELIZABETH",
-"VASQUEZ CASTAÑEDA KENIA CAMILA",
-"VASQUEZ TAPIA SEBASTIAN"
+{lista:1,nombre:"AGUILAR ROCHA FABIAN YAIR"},
+{lista:2,nombre:"BOBADILLA HERNANDEZ TANIA"},
+{lista:3,nombre:"CALVO RAMIREZ YESHUA EMMANUEL"},
+{lista:4,nombre:"CAMPOS BERNAL ABRIL AKARI"},
+{lista:5,nombre:"CORTES ESCAMILLA ABRAHAM"},
+{lista:6,nombre:"COTERO MINISTRO XIMENA VALENTINA"},
+{lista:7,nombre:"CRUZ ORTEGA ERICK URIEL"},
+{lista:8,nombre:"DAVILA CASTAÑEDA KEVIN"},
+{lista:9,nombre:"FERNIZA CORTEZ CARLOS ALBERTO"},
+{lista:10,nombre:"GARCIA FERNANDEZ JEREMY ALAIN"},
+{lista:11,nombre:"GARCIA RAMIREZ YAZARET MELISSA"},
+{lista:12,nombre:"GONZALEZ BETANZOS ENGADI TZITZIKI"},
+{lista:13,nombre:"GUADARRAMA SANCHEZ KARIM"},
+{lista:14,nombre:"GUARDA HERNANDEZ JEFTE"},
+{lista:15,nombre:"JARDON ALBA DARSHAN BAKARI"},
+{lista:16,nombre:"JIMENEZ CORTEZ DIEGO JADIEL"},
+{lista:17,nombre:"LARA GOMEZ ESTEFANIA"},
+{lista:18,nombre:"LOME CHEPE JOSE MIGUEL"},
+{lista:19,nombre:"LOPEZ BERNAL AZUL CAMILA"},
+{lista:20,nombre:"MANCILLA SALINAS ESTRELLA GUADALUPE"},
+{lista:21,nombre:"MARTINEZ CHAVEZ ARIANA ABIGAIL"},
+{lista:22,nombre:"MARTINEZ MARTINEZ JOSE ANGEL"},
+{lista:23,nombre:"MESAS ORTEGA NARALY"},
+{lista:24,nombre:"MILLAN BUSTOS AXEL ALBERTO"},
+{lista:25,nombre:"OCAMPO SANCHEZ AXEL JESUS"},
+{lista:26,nombre:"ORIHUELA MILLAN JESUS EMMANUEL"},
+{lista:27,nombre:"PERALTA LOPEZ LEONARDO"},
+{lista:28,nombre:"PERETE NUÑEZ CAMILA ZOE"},
+{lista:29,nombre:"QUIROZ RIVERA IVAN ALONSO"},
+{lista:30,nombre:"REYES PEÑA YOLEI XIMENA"},
+{lista:31,nombre:"RIOJA PIÑA YAHEL ALBERTO"},
+{lista:32,nombre:"ROMERO GUTIERREZ ITZEL MARCELA"},
+{lista:33,nombre:"ROMERO MENDOZA JUAN"},
+{lista:34,nombre:"ROSALES MARTINEZ SEBASTIAN"},
+{lista:35,nombre:"SANCHEZ SILVA XIMENA"},
+{lista:36,nombre:"VARA GARCIA ZOAR"},
+{lista:37,nombre:"VASQUEZ BUSTOS ROXANA ELIZABETH"},
+{lista:38,nombre:"VASQUEZ CASTAÑEDA KENIA CAMILA"},
+{lista:39,nombre:"VASQUEZ TAPIA SEBASTIAN"}
 ];
 
 let actual = 0;
 
-document.getElementById("nombreAlumno").textContent = alumnos[0];
+function mostrarAlumno(){
+
+document.getElementById("nombreAlumno").textContent =
+"Lista " + alumnos[actual].lista + " | " + alumnos[actual].nombre;
+
+document.getElementById("contador").textContent =
+"Alumno " + (actual + 1) + " de " + alumnos.length;
+
+}
 
 function siguiente(){
-    actual++;
-
-    if(actual < alumnos.length){
-        document.getElementById("nombreAlumno").textContent = alumnos[actual];
-    }else{
-        document.getElementById("nombreAlumno").textContent = "✅ Lista terminada";
-    }
+if(actual < alumnos.length - 1){
+actual++;
+mostrarAlumno();
 }
+}
+
+function anterior(){
+if(actual > 0){
+actual--;
+mostrarAlumno();
+}
+}
+
+mostrarAlumno();
 
 </script>
 
