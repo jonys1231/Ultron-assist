@@ -3,13 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Ultron Assist</title>
 
 https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.jsscript>
 
 <style>
+
 body{
-    font-family:Arial,sans-serif;
+    font-family: Arial, sans-serif;
     background:#f5f5f5;
     text-align:center;
     padding:20px;
@@ -19,29 +21,39 @@ h1{
     color:#2563eb;
 }
 
+h2{
+    color:#666;
+}
+
 .alumno{
     background:white;
     max-width:900px;
     margin:auto;
     padding:30px;
     border-radius:20px;
-    box-shadow:0 0 10px rgba(0,0,0,.1);
+    box-shadow:0 0 10px rgba(0,0,0,0.1);
 }
 
 #nombreAlumno{
     display:block;
-    font-size:30px;
+    font-size:32px;
     font-weight:bold;
     margin:25px 0;
+}
+
+.botones{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:15px;
 }
 
 button{
     width:120px;
     height:120px;
-    font-size:45px;
+    font-size:50px;
     border:none;
     border-radius:20px;
-    margin:10px;
     cursor:pointer;
 }
 
@@ -55,21 +67,22 @@ button{
 
 .flecha{
     background:#3b82f6;
-    color:white;
 }
 
 #excel{
+    display:none;
     width:auto;
     height:auto;
+    padding:15px 30px;
     font-size:20px;
-    padding:15px 25px;
+    margin-top:20px;
     background:#f59e0b;
     color:white;
-    display:none;
 }
-</style>
 
+</style>
 </head>
+
 <body>
 
 <h1>Ultron Assist</h1>
@@ -80,7 +93,8 @@ button{
 
 <span id="nombreAlumno"></span>
 
-<div>
+<div class="botones">
+
 <button class="flecha" onclick="anterior()">⬅️</button>
 
 <button class="verde" onclick="registrar('Presente')">🟢</button>
@@ -88,9 +102,8 @@ button{
 <button class="rojo" onclick="registrar('Ausente')">🔴</button>
 
 <button class="flecha" onclick="siguiente()">➡️</button>
-</div>
 
-<br>
+</div>
 
 <button id="excel" onclick="descargarExcel()">
 📊 Descargar Excel
@@ -101,7 +114,6 @@ button{
 <script>
 
 const alumnos = [
-
 {lista:1,nombre:"AGUILAR ROCHA FABIAN YAIR"},
 {lista:2,nombre:"BOBADILLA HERNANDEZ TANIA"},
 {lista:3,nombre:"CALVO RAMIREZ YESHUA EMMANUEL"},
@@ -141,7 +153,6 @@ const alumnos = [
 {lista:37,nombre:"VASQUEZ BUSTOS ROXANA ELIZABETH"},
 {lista:38,nombre:"VASQUEZ CASTAÑEDA KENIA CAMILA"},
 {lista:39,nombre:"VASQUEZ TAPIA SEBASTIAN"}
-
 ];
 
 let actual = 0;
@@ -150,12 +161,16 @@ let asistencias = [];
 function mostrarAlumno(){
 
 document.getElementById("nombreAlumno").textContent =
-"Lista " + alumnos[actual].lista +
+"Lista " +
+alumnos[actual].lista +
 " | " +
 alumnos[actual].nombre;
 
 document.getElementById("contador").textContent =
-"Alumno " + (actual + 1) + " de " + alumnos.length;
+"Alumno " +
+(actual + 1) +
+" de " +
+alumnos.length;
 
 }
 
@@ -178,7 +193,8 @@ document.getElementById("nombreAlumno").textContent =
 "✅ Lista terminada";
 
 document.getElementById("contador").textContent =
-"Asistencias registradas: " + asistencias.length;
+"Asistencias registradas: " +
+asistencias.length;
 
 document.getElementById("excel").style.display =
 "inline-block";
